@@ -16,7 +16,6 @@
    in ALL_CAPS or marked TODO with your own code.
 ================================================================ */
 
-
 /* ----------------------------------------------------------------
    STEP 1: GRAB YOUR DOM ELEMENTS
    ----------------------------------------------------------------
@@ -32,7 +31,6 @@ const message = document.getElementById("message");
 const answerBtn = document.getElementById("answerBtn");
 const resetBtn = document.getElementById("resetBtn");
 const devLog = document.getElementById("devLog");
-
 
 /* ----------------------------------------------------------------
    STEP 2: CREATE YOUR GAME STATE VARIABLE(S)
@@ -52,8 +50,7 @@ const devLog = document.getElementById("devLog");
 
    TODO: Replace the line below with your own state variable.
 ---------------------------------------------------------------- */
-let gameState = 0; // <-- rename this and set a starting value
-
+let xp = 0; // <-- rename this and set a starting value
 
 /* ----------------------------------------------------------------
    STEP 3 (OPTIONAL — Random Rewards teams need this):
@@ -71,7 +68,6 @@ let gameState = 0; // <-- rename this and set a starting value
 ---------------------------------------------------------------- */
 // const rewardOptions = [/* TODO: add your possible values */];
 
-
 /* ----------------------------------------------------------------
    STEP 4: SIMULATE A "CORRECT" OR "INCORRECT" ANSWER
    ----------------------------------------------------------------
@@ -88,7 +84,6 @@ function isAnswerCorrect() {
   return Math.random() > 0.5;
 }
 
-
 /* ----------------------------------------------------------------
    STEP 5: BUILD YOUR GAME LOGIC (THE CORE OF YOUR CHALLENGE)
    ----------------------------------------------------------------
@@ -99,14 +94,13 @@ function isAnswerCorrect() {
    Before writing code here, finish this sentence on paper or in
    chat with your team:
 
-     IF ________________________
-     THEN ________________________
+     IF answer if false THEN do not change xp
+     IF answer is correct THEN xp++50
 
    Then translate it below. Some starter patterns are shown —
    delete the ones you don't need and build out your own.
 ---------------------------------------------------------------- */
 function handleAnswer() {
-
   const correct = isAnswerCorrect();
 
   // --------------------------------------------------------------
@@ -134,13 +128,12 @@ function handleAnswer() {
   // --------------------------------------------------------------
 
   if (correct) {
-    // TODO: what happens to your game state when the answer is correct?
+    xp += 50;
     message.textContent = "Correct!";
   } else {
-    // TODO: what happens to your game state when the answer is incorrect?
+    // Incorrect answers do not change XP.
     message.textContent = "Try again!";
   }
-
 
   // --------------------------------------------------------------
   // TODO: Add at least ONE more condition that checks a MILESTONE.
@@ -166,21 +159,19 @@ function handleAnswer() {
 
   // TODO: add your milestone if/else if/else chain here
 
-
   // --------------------------------------------------------------
   // STEP 6: UPDATE THE SCREEN
   // --------------------------------------------------------------
   // Remember: changing a variable does NOT change what the player
   // sees. You have to update the DOM separately.
   // --------------------------------------------------------------
-  statValue.textContent = gameState;
+  statValue.textContent = xp;
 
   // This logs to YOUR dev console (in the browser, press F12 to see
   // the real one too) — it's for your team, not the player.
-  console.log("Current state:", gameState, "| Correct?", correct);
-  devLog.textContent = `state = ${gameState} | last answer correct = ${correct}`;
+  console.log("Current XP:", xp, "| Correct?", correct);
+  devLog.textContent = `XP = ${xp} | last answer correct = ${correct}`;
 }
-
 
 /* ----------------------------------------------------------------
    STEP 7: RESET BUTTON
@@ -194,15 +185,14 @@ function handleAnswer() {
    TODO: Update the starting value below to match Step 2.
 ---------------------------------------------------------------- */
 function handleReset() {
-  gameState = 0; // <-- match this to your starting value from Step 2
+  xp = 0;
 
-  statValue.textContent = gameState;
-  message.textContent = "Press \"Answer\" to begin!";
+  statValue.textContent = xp;
+  message.textContent = 'Press "Answer" to begin!';
   devLog.textContent = "Waiting for input...";
 
   console.log("Game state reset.");
 }
-
 
 /* ----------------------------------------------------------------
    STEP 8: EVENT LISTENERS
@@ -212,7 +202,6 @@ function handleReset() {
 ---------------------------------------------------------------- */
 answerBtn.addEventListener("click", handleAnswer);
 resetBtn.addEventListener("click", handleReset);
-
 
 /* ================================================================
    ✅ CHECKLIST BEFORE YOU SHOWCASE
